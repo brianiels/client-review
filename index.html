@@ -260,14 +260,14 @@
                 <input type="hidden" name="_next" value="thank-you.html">
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="FirstName">FirstName <span class="required">*</span></label>
-                        <input type="text" id="FirstName" name="FirstName" required>
+                        <label for="firstName">firstName <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required>
                         <div class="error-message">Please enter First name</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="LastName">LastName <span class="required">*</span></label>
-                        <input type="text" id="LastName" name="LastName" required>
+                        <label for="lastName">LastName <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required>
                         <div class="error-message">Please enter Last name</div>
                     </div>
                     
@@ -395,7 +395,7 @@
         }
 
         // Real-time validation
-        document.getElementById('FirstName').addEventListener('blur', function() {
+        document.getElementById('firstName').addEventListener('blur', function() {
             if (this.value.trim() === '') {
                 showError(this, 'Please enter your first name');
             } else {
@@ -403,7 +403,7 @@
             }
         });
 
-        document.getElementById('LastName').addEventListener('blur', function() {
+        document.getElementById('lastName').addEventListener('blur', function() {
             if (this.value.trim() === '') {
                 showError(this, 'Please enter your last name');
             } else {
@@ -456,8 +456,8 @@
             let isValid = true;
             
             // Validate all fields
-            const FirstName = document.getElementById('FirstName');
-            const LastName = document.getElementById('LastName');
+            const FirstName = document.getElementById('firstName');
+            const LastName = document.getElementById('lastName');
             const phone = document.getElementById('phone');
             const email = document.getElementById('email');
             const rating = document.getElementById('rating');
@@ -465,12 +465,12 @@
             const feedback = document.getElementById('feedback');
             
             if (firstName.value.trim() === '') {
-                showError(FirstName, 'Please enter your First name');
+                showError(firstName, 'Please enter your first name');
                 isValid = false;
             }
             
-            if (LastName.value.trim() === '') {
-                showError(LastName, 'Please enter your Last name');
+            if (lastName.value.trim() === '') {
+                showError(lastName, 'Please enter your last name');
                 isValid = false;
             }
             
@@ -510,8 +510,8 @@
             if (isValid) {
                 // Prepare form data
                 const formData = new FormData();
-                formData.append('FirstName', FirstName.value);
-                formData.append('LastName', LastName.value);
+                formData.append('FirstName', firstName.value);
+                formData.append('LastName', lastName.value);
                 formData.append('phone', phone.value);
                 formData.append('email', email.value);
                 formData.append('rating', rating.value);
