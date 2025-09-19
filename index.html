@@ -393,9 +393,17 @@
         }
 
         // Real-time validation
-        document.getElementById('clientName').addEventListener('blur', function() {
+        document.getElementById('FirstName').addEventListener('blur', function() {
             if (this.value.trim() === '') {
-                showError(this, 'Please enter your name');
+                showError(this, 'Please enter your first name');
+            } else {
+                clearError(this.closest('.form-group'));
+            }
+        });
+
+        document.getElementById('LastName').addEventListener('blur', function() {
+            if (this.value.trim() === '') {
+                showError(this, 'Please enter your last name');
             } else {
                 clearError(this.closest('.form-group'));
             }
@@ -446,15 +454,21 @@
             let isValid = true;
             
             // Validate all fields
-            const clientName = document.getElementById('clientName');
+            const FirstName = document.getElementById('FirstName');
+            const LastName = document.getElementById('LastName');
             const phone = document.getElementById('phone');
             const email = document.getElementById('email');
             const rating = document.getElementById('rating');
             const serviceType = document.getElementById('serviceType');
             const feedback = document.getElementById('feedback');
             
-            if (clientName.value.trim() === '') {
-                showError(clientName, 'Please enter your name');
+            if (firstName.value.trim() === '') {
+                showError(FirstName, 'Please enter your First name');
+                isValid = false;
+            }
+            
+            if (LastName.value.trim() === '') {
+                showError(LastName, 'Please enter your Last name');
                 isValid = false;
             }
             
@@ -487,14 +501,15 @@
             }
             
             if (feedback.value.trim() === '') {
-                showError(feedback, 'Please provide your feedback');
+                showError(feedback, 'Please provide your Feedback');
                 isValid = false;
             }
             
             if (isValid) {
                 // Prepare form data
                 const formData = new FormData();
-                formData.append('clientName', clientName.value);
+                formData.append('FirstName', FirstName.value);
+                formData.append('LastName', LastName.value);
                 formData.append('phone', phone.value);
                 formData.append('email', email.value);
                 formData.append('rating', rating.value);
@@ -507,8 +522,7 @@
                 submitBtn.textContent = 'Submitting...';
                 submitBtn.disabled = true;
                 
-                // Using Formspree for form submission - works perfectly with GitHub Pages
-                // Replace 'meoqbzke' with your actual Formspree form ID from https://formspree.io
+                // Using Formspree for form submission
                 fetch('https://formspree.io/f/xldwyavr', {
                     method: 'POST',
                     body: formData,
@@ -523,7 +537,7 @@
                     throw new Error('Network response was not ok');
                 })
                 .then(data => {
-                    alert('✅ Thank you for your review! We have received your feedback and will get back to you soon.');
+                    alert('✅ Thank you for your review! We have received your feedback. Take care');
                     this.reset();
                     currentRating = 0;
                     updateStars(0);
@@ -532,7 +546,7 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('❌ There was an error submitting your review. Please try again or contact us directly at your-email@company.com');
+                    alert('❌ There was an error submitting your review. Please try again or contact us directly at mkisembo@multiprofessionals.com');
                 })
                 .finally(() => {
                     submitBtn.textContent = originalText;
